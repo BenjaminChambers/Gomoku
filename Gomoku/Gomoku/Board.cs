@@ -33,8 +33,8 @@ namespace Gomoku
 
         public (int MinC, int MaxC, int MinR, int MaxR) GetWhiteSpace()
         {
-            int minC = 0, maxC = 0;
-            int minR = 0, maxR = 0;
+            int minC = 15, maxC = -1;
+            int minR = 15, maxR = -1;
 
             for (int c = 0; c < 15; c++)
             {
