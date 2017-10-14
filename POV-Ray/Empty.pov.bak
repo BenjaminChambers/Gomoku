@@ -1,0 +1,15 @@
+camera {
+	orthographic
+	up y
+	right x
+	location -z*10
+	look_at 0
+}
+
+#declare lineThickness = 0.025;
+
+union {
+	cylinder {-y,y,lineThickness}
+	cylinder {-x,x,lineThickness}
+	pigment {color rgb 0}
+}
