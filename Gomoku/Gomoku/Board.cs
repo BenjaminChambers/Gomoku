@@ -20,11 +20,11 @@ namespace Gomoku
         {
             var result = new Board();
 
-            for (int c=Math.Max(0, dX); c<Math.Min(15,dX); c++)
+            for (int c=Math.Max(0, -dX); c<Math.Min(15,15-dX); c++)
             {
-                for (int r=Math.Max(0,dY); r<Math.Min(15,dY); r++)
+                for (int r=Math.Max(0,-dY); r<Math.Min(15,15-dY); r++)
                 {
-                    result.data[c, r] = this[c + dX, r + dY];
+                    result.data[c+dX, r+dY] = this[c, r];
                 }
             }
 
