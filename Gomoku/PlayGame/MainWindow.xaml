@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PlayGame"
         mc:Ignorable="d"
         Title="MainWindow"
-        Height="700" Width="900">
+        Height="700" Width="1100">
     <Window.Resources>
         <Style x:Key="CellStyle">
             <Setter Property="Button.Margin" Value="0" />
@@ -34,6 +34,47 @@
             <Button Width="75" Height="75" Margin="15" Click="OnNewGame" BorderThickness="1" >
                 <TextBlock Text="New Game" />
             </Button>
+            <Grid Margin="15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="75" />
+                    <ColumnDefinition Width="75" />
+                    <ColumnDefinition Width="75" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="75" />
+                </Grid.RowDefinitions>
+                <Button Grid.Column="1" Grid.Row="0" Padding="0" Click="OnShiftUp" BorderThickness="1" >
+                    <TextBlock Text="Shift Up One" TextAlignment="Center" TextWrapping="Wrap" />
+                </Button>
+                <Button Grid.Column="0" Grid.Row="1" Padding="0" Click="OnShiftLeft" BorderThickness="1" >
+                    <TextBlock Text="Shift Left One" TextAlignment="Center" TextWrapping="Wrap" />
+                </Button>
+                <Button Grid.Column="2" Grid.Row="1" Padding="0" Click="OnShiftRight" BorderThickness="1" >
+                    <TextBlock Text="Shift Right One" TextAlignment="Center" TextWrapping="Wrap" />
+                </Button>
+                <Button Grid.Column="1" Grid.Row="2" Padding="0" Click="OnShiftDown" BorderThickness="1" >
+                    <TextBlock Text="Shift Down One" TextAlignment="Center" TextWrapping="Wrap" />
+                </Button>
+
+                <Button Grid.Column="0" Grid.Row="0" Padding="0" Click="OnUpperLeft" BorderThickness="1" >
+                    <TextBlock Text="Upper Left" TextAlignment="Center" TextWrapping="Wrap" />
+                </Button>
+                <Button Grid.Column="2" Grid.Row="0" Padding="0" Click="OnUpperRight" BorderThickness="1" >
+                    <TextBlock Text="Upper Right" TextAlignment="Center" TextWrapping="Wrap" />
+                </Button>
+                <Button Grid.Column="0" Grid.Row="2" Padding="0" Click="OnLowerLeft" BorderThickness="1" >
+                    <TextBlock Text="Lower Left" TextAlignment="Center" TextWrapping="Wrap" />
+                </Button>
+                <Button Grid.Column="2" Grid.Row="2" Padding="0" Click="OnLowerRight" BorderThickness="1" >
+                    <TextBlock Text="Lower Right" TextAlignment="Center" TextWrapping="Wrap" />
+                </Button>
+
+                <Button Grid.Column="1" Grid.Row="1" Padding="0" Click="OnCenter" BorderThickness="1" >
+                    <TextBlock Text="Center" TextAlignment="Center" TextWrapping="Wrap" />
+                </Button>
+            </Grid>
         </StackPanel>
         <Grid x:Name="GameGrid"
               HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -50,8 +91,8 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <StackPanel x:Name="WhiteMoves" Grid.Column="1" Margin="15" />
-                <StackPanel x:Name="BlackMoves" Margin="15" />
+                <StackPanel x:Name="BlackMoves" Width="75" Margin="15" />
+                <StackPanel x:Name="WhiteMoves" Width="75" Grid.Column="1" Margin="15" />
             </Grid>
         </StackPanel>
     </Grid>

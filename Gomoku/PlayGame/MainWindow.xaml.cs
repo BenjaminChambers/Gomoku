@@ -48,19 +48,19 @@ namespace PlayGame
                 {
                     var img = new Image() { Source = ImageCache[Gomoku.Stone.Empty] };
 
-                    Cells[r, c] = new Button()
+                    Cells[c, r] = new Button()
                     {
-                        Name = string.Format("Cell{0:00}{1:00}", r, c),
+                        Name = string.Format("Cell{0:00}{1:00}", c, r),
                         Content = img,
                         Width = 40,
                         Height = 40
                     };
-                    Cells[r, c].Click += OnPlayCell;
-                    Cells[r, c].Style = (Style)Resources["CellStyle"];
+                    Cells[c, r].Click += OnPlayCell;
+                    Cells[c, r].Style = (Style)Resources["CellStyle"];
 
-                    Grid.SetRow(Cells[r, c], r);
-                    Grid.SetColumn(Cells[r, c], c);
-                    GameGrid.Children.Add(Cells[r, c]);
+                    Grid.SetRow(Cells[c,r], r);
+                    Grid.SetColumn(Cells[c, r], c);
+                    GameGrid.Children.Add(Cells[c, r]);
                 }
             }
 
@@ -70,15 +70,20 @@ namespace PlayGame
         private void NewGame()
         {
             board = new Gomoku.Board();
+            RedrawAll();
+            WhiteMoves.Children.Clear();
+            BlackMoves.Children.Clear();
+        }
+
+        private void RedrawAll()
+        {
             for (int r = 0; r < 15; r++)
             {
                 for (int c = 0; c < 15; c++)
                 {
-                    ((Image)Cells[r, c].Content).Source = ImageCache[Gomoku.Stone.Empty];
+                    ((Image)Cells[c,r].Content).Source = ImageCache[board[c,r]];
                 }
             }
-            WhiteMoves.Children.Clear();
-            BlackMoves.Children.Clear();
         }
 
         private void OnPlayCell(object sender, RoutedEventArgs e)
@@ -123,6 +128,74 @@ namespace PlayGame
         private void OnNewGame(object sender, RoutedEventArgs e)
         {
             NewGame();
+        }
+
+        private void OnShiftUp(object sender, RoutedEventArgs e)
+        {
+            board = board.Shift(0, -1);
+            RedrawAll();
+        }
+
+        private void OnShiftLeft(object sender, RoutedEventArgs e)
+        {
+            board = board.Shift(-1, 0);
+            RedrawAll();
+        }
+
+        private void OnShiftRight(object sender, RoutedEventArgs e)
+        {
+            board = board.Shift(1, 0);
+            RedrawAll();
+        }
+
+        private void OnShiftDown(object sender, RoutedEventArgs e)
+        {
+            board = board.Shift(0, 1);
+            RedrawAll();
+        }
+
+        private void OnCenter(object sender, RoutedEventArgs e)
+        {
+            var bounds = board.GetBounds();
+            var right = 14 - bounds.MaxColumn;
+            var bottom = 14 - bounds.MaxRow;
+
+            var avgC = (bounds.MinColumn + right) / 2;
+            var avgR = (bounds.MinRow + bottom) / 2;
+
+            var shiftC = avgC - bounds.MinColumn;
+            var shiftR = avgR - bounds.MinRow;
+
+            board = board.Shift(shiftC, shiftR);
+            RedrawAll();
+        }
+
+        private void OnUpperLeft(object sender, RoutedEventArgs e)
+        {
+            var bounds = board.GetBounds();
+            board = board.Shift(-bounds.MinColumn, -bounds.MinRow);
+            RedrawAll();
+        }
+
+        private void OnUpperRight(object sender, RoutedEventArgs e)
+        {
+            var bounds = board.GetBounds();
+            board = board.Shift(14-bounds.MaxColumn, -bounds.MinRow);
+            RedrawAll();
+        }
+
+        private void OnLowerLeft(object sender, RoutedEventArgs e)
+        {
+            var bounds = board.GetBounds();
+            board = board.Shift(-bounds.MinColumn, 14-bounds.MaxRow);
+            RedrawAll();
+        }
+
+        private void OnLowerRight(object sender, RoutedEventArgs e)
+        {
+            var bounds = board.GetBounds();
+            board = board.Shift(14-bounds.MaxColumn, 14 - bounds.MaxRow);
+            RedrawAll();
         }
     }
 }
