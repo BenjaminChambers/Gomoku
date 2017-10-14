@@ -31,7 +31,7 @@ namespace Gomoku
             return result;
         }
 
-        public (int MinC, int MaxC, int MinR, int MaxR) GetWhiteSpace()
+        public (int MinC, int MaxC, int MinR, int MaxR) GetBounds()
         {
             int minC = 15, maxC = -1;
             int minR = 15, maxR = -1;
