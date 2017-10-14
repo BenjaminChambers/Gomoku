@@ -31,7 +31,7 @@ namespace Gomoku
             return result;
         }
 
-        public (int MinC, int MaxC, int MinR, int MaxR) GetBounds()
+        public (int MinColumn, int MaxColumn, int MinRow, int MaxRow) GetBounds()
         {
             int minC = 15, maxC = -1;
             int minR = 15, maxR = -1;
