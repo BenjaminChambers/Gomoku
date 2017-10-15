@@ -21,11 +21,11 @@ namespace Gomoku
         {
             var result = new Board();
 
-            for (int c=Math.Max(0, -Delta.Column); c<Math.Min(15,15-Delta.Column); c++)
+            for (int c = Math.Max(0, -Delta.Column); c < Math.Min(15, 15 - Delta.Column); c++)
             {
-                for (int r=Math.Max(0,-Delta.Row); r<Math.Min(15,15- Delta.Row); r++)
+                for (int r = Math.Max(0, -Delta.Row); r < Math.Min(15, 15 - Delta.Row); r++)
                 {
-                    result.data[c+ Delta.Column, r+ Delta.Row] = this[c, r];
+                    result.data[c + Delta.Column, r + Delta.Row] = this[c, r];
                 }
             }
 
@@ -96,12 +96,12 @@ namespace Gomoku
         {
             var which = this[Column, Row];
 
-            int d19 = Crawl(Column, Row, which, -1, -1) + Crawl(Column, Row, which, 1, 1);
-            int d28 = Crawl(Column, Row, which, 0, -1) + Crawl(Column, Row, which, 0, 1);
-            int d37 = Crawl(Column, Row, which, -1, 1) + Crawl(Column, Row, which, 1, -1);
-            int d46 = Crawl(Column, Row, which, -1, 0) + Crawl(Column, Row, which, 1, 0);
+            int d19 = Crawl(new Coordinate(Column, Row), new Coordinate(-1, -1), which) + Crawl(new Coordinate(Column, Row), new Coordinate(1, 1), which);
+            int d28 = Crawl(new Coordinate(Column, Row), new Coordinate(0, -1), which) + Crawl(new Coordinate(Column, Row), new Coordinate(0, 1), which);
+            int d37 = Crawl(new Coordinate(Column, Row), new Coordinate(-1, 1), which) + Crawl(new Coordinate(Column, Row), new Coordinate(1, -1), which);
+            int d46 = Crawl(new Coordinate(Column, Row), new Coordinate(-1, 0), which) + Crawl(new Coordinate(Column, Row), new Coordinate(1, 0), which);
 
-            if ((d19>5) || (d28>5) || (d37>5) || (d46>5))
+            if ((d19 > 5) || (d28 > 5) || (d37 > 5) || (d46 > 5))
             {
                 switch (which)
                 {
@@ -111,14 +111,14 @@ namespace Gomoku
             }
         }
 
-        private int Crawl(int column, int row, Stone color, int dc, int dr)
+        private int Crawl(Coordinate Location, Coordinate Delta, Stone color)
         {
             int result = 0;
-            
-            while ((column >=0) && (column<15) && (row>=0) && (row<15) && (this[column,row]==color))
+
+            while ((Location.Column >= 0) && (Location.Column < 15) && (Location.Row >= 0) && (Location.Row < 15) && (this[Location.Column, Location.Row] == color))
             {
-                column += dc;
-                row += dr;
+                Location.Column += Delta.Column;
+                Location.Row += Delta.Row;
                 result++;
             }
 
