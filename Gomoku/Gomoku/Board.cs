@@ -16,15 +16,15 @@ namespace Gomoku
             State = Source.State;
         }
 
-        public Board Shift(int dX, int dY)
+        public Board Shift(Coordinate Delta)
         {
             var result = new Board();
 
-            for (int c=Math.Max(0, -dX); c<Math.Min(15,15-dX); c++)
+            for (int c=Math.Max(0, -Delta.Column); c<Math.Min(15,15-Delta.Column); c++)
             {
-                for (int r=Math.Max(0,-dY); r<Math.Min(15,15-dY); r++)
+                for (int r=Math.Max(0,-Delta.Row); r<Math.Min(15,15- Delta.Row); r++)
                 {
-                    result.data[c+dX, r+dY] = this[c, r];
+                    result.data[c+ Delta.Column, r+ Delta.Row] = this[c, r];
                 }
             }
 
