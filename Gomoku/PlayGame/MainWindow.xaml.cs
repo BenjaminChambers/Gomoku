@@ -99,13 +99,13 @@ namespace PlayGame
                 {
                     if (White)
                     {
-                        board = board.Put(Col, Row, Gomoku.Stone.White);
+                        board = board.Put(new Gomoku.Coordinate(Col, Row), Gomoku.Stone.White);
                         ((Image)b.Content).Source = ImageCache[Gomoku.Stone.White];
                         WhiteMoves.Children.Add(new TextBlock() { Text = string.Format("{0},{1}", Col, Row) });
                     }
                     else
                     {
-                        board = board.Put(Col, Row, Gomoku.Stone.Black);
+                        board = board.Put(new Gomoku.Coordinate(Col, Row), Gomoku.Stone.Black);
                         ((Image)b.Content).Source = ImageCache[Gomoku.Stone.Black];
                         BlackMoves.Children.Add(new TextBlock() { Text = string.Format("{0},{1}", Col, Row) });
                     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Gomoku
@@ -53,14 +54,27 @@ namespace Gomoku
             return (new Coordinate(minC, minR), new Coordinate(maxC, maxR));
         }
 
-        public Board Put(int Column, int Row, Stone Color)
+        public Board Put(Coordinate Location, Stone Color)
         {
             if (Color == Stone.Empty)
                 throw new ArgumentException("Stone cannot be Empty");
 
             var result = new Board(this);
-            result.data[Column, Row] = Color;
-            result.CheckState(Column, Row);
+            result.data[Location.Column, Location.Row] = Color;
+            result.CheckState(Location.Column, Location.Row);
+            return result;
+        }
+        public Board Put(IEnumerable<(Coordinate Where, Stone Color)> Stones)
+        {
+            if (Stones.Where(x => x.Color == Stone.Empty).Any())
+                throw new ArgumentException("Stone cannot be Empty");
+
+            var result = new Board(this);
+            foreach (var item in Stones)
+            {
+                result.data[item.Where.Column, item.Where.Row] = item.Color;
+                result.CheckState(item.Where.Column, item.Where.Row);
+            }
             return result;
         }
 
