@@ -157,14 +157,14 @@ namespace PlayGame
         private void OnCenter(object sender, RoutedEventArgs e)
         {
             var bounds = board.GetBounds();
-            var right = 14 - bounds.MaxColumn;
-            var bottom = 14 - bounds.MaxRow;
+            var right = 14 - bounds.Maximum.Column;
+            var bottom = 14 - bounds.Maximum.Row;
 
-            var avgC = (bounds.MinColumn + right) / 2;
-            var avgR = (bounds.MinRow + bottom) / 2;
+            var avgC = (bounds.Minimum.Column + right) / 2;
+            var avgR = (bounds.Minimum.Row + bottom) / 2;
 
-            var shiftC = avgC - bounds.MinColumn;
-            var shiftR = avgR - bounds.MinRow;
+            var shiftC = avgC - bounds.Minimum.Column;
+            var shiftR = avgR - bounds.Minimum.Row;
 
             board = board.Shift(new Gomoku.Coordinate(shiftC, shiftR));
             RedrawAll();
@@ -173,28 +173,28 @@ namespace PlayGame
         private void OnUpperLeft(object sender, RoutedEventArgs e)
         {
             var bounds = board.GetBounds();
-            board = board.Shift(new Gomoku.Coordinate(-bounds.MinColumn, -bounds.MinRow));
+            board = board.Shift(new Gomoku.Coordinate(-bounds.Minimum.Column, -bounds.Minimum.Row));
             RedrawAll();
         }
 
         private void OnUpperRight(object sender, RoutedEventArgs e)
         {
             var bounds = board.GetBounds();
-            board = board.Shift(new Gomoku.Coordinate(14 -bounds.MaxColumn, -bounds.MinRow));
+            board = board.Shift(new Gomoku.Coordinate(14 -bounds.Maximum.Column, -bounds.Minimum.Row));
             RedrawAll();
         }
 
         private void OnLowerLeft(object sender, RoutedEventArgs e)
         {
             var bounds = board.GetBounds();
-            board = board.Shift(new Gomoku.Coordinate(-bounds.MinColumn, 14-bounds.MaxRow));
+            board = board.Shift(new Gomoku.Coordinate(-bounds.Minimum.Column, 14-bounds.Maximum.Row));
             RedrawAll();
         }
 
         private void OnLowerRight(object sender, RoutedEventArgs e)
         {
             var bounds = board.GetBounds();
-            board = board.Shift(new Gomoku.Coordinate(14 -bounds.MaxColumn, 14 - bounds.MaxRow));
+            board = board.Shift(new Gomoku.Coordinate(14 -bounds.Maximum.Column, 14 - bounds.Maximum.Row));
             RedrawAll();
         }
     }

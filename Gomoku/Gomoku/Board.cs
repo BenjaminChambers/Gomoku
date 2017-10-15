@@ -31,7 +31,7 @@ namespace Gomoku
             return result;
         }
 
-        public (int MinColumn, int MaxColumn, int MinRow, int MaxRow) GetBounds()
+        public (Coordinate Minimum, Coordinate Maximum) GetBounds()
         {
             int minC = 15, maxC = -1;
             int minR = 15, maxR = -1;
@@ -50,7 +50,7 @@ namespace Gomoku
                 }
             }
 
-            return (minC, maxC, minR, maxR);
+            return (new Coordinate(minC, minR), new Coordinate(maxC, maxR));
         }
 
         public Board Put(int Column, int Row, Stone Color)
