@@ -7,6 +7,7 @@ namespace Gomoku
 {
     public class Board
     {
+        #region Constructors
         public Board()
         {
             State = BoardState.InProgress;
@@ -16,7 +17,9 @@ namespace Gomoku
             Array.Copy(Source.data, data, data.Length);
             State = Source.State;
         }
+        #endregion
 
+        #region Board modification
         public Board Shift(Coordinate Delta)
         {
             var result = new Board();
@@ -30,28 +33,6 @@ namespace Gomoku
             }
 
             return result;
-        }
-
-        public (Coordinate Minimum, Coordinate Maximum) GetBounds()
-        {
-            int minC = 15, maxC = -1;
-            int minR = 15, maxR = -1;
-
-            for (int c = 0; c < 15; c++)
-            {
-                for (int r = 0; r < 15; r++)
-                {
-                    if (this[c, r] != Stone.Empty)
-                    {
-                        minC = Math.Min(c, minC);
-                        maxC = Math.Max(c, maxC);
-                        minR = Math.Min(r, minR);
-                        maxR = Math.Max(r, maxR);
-                    }
-                }
-            }
-
-            return (new Coordinate(minC, minR), new Coordinate(maxC, maxR));
         }
 
         public Board Put(Coordinate Location, Stone Color)
@@ -77,7 +58,9 @@ namespace Gomoku
             }
             return result;
         }
+        #endregion
 
+        #region Board Information
         public Stone this[int Column, int Row]
         {
             get
@@ -92,6 +75,30 @@ namespace Gomoku
             private set;
         }
 
+        public (Coordinate Minimum, Coordinate Maximum) GetBounds()
+        {
+            int minC = 15, maxC = -1;
+            int minR = 15, maxR = -1;
+
+            for (int c = 0; c < 15; c++)
+            {
+                for (int r = 0; r < 15; r++)
+                {
+                    if (this[c, r] != Stone.Empty)
+                    {
+                        minC = Math.Min(c, minC);
+                        maxC = Math.Max(c, maxC);
+                        minR = Math.Min(r, minR);
+                        maxR = Math.Max(r, maxR);
+                    }
+                }
+            }
+
+            return (new Coordinate(minC, minR), new Coordinate(maxC, maxR));
+        }
+        #endregion
+
+        #region Private
         private void CheckState(int Column, int Row)
         {
             var which = this[Column, Row];
@@ -127,5 +134,6 @@ namespace Gomoku
         }
 
         private Stone[,] data = new Stone[15, 15];
+        #endregion
     }
 }
