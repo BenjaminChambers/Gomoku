@@ -73,6 +73,7 @@ namespace PlayGame
             RedrawAll();
             WhiteMoves.Children.Clear();
             BlackMoves.Children.Clear();
+            White = false;
         }
 
         private void RedrawAll()
