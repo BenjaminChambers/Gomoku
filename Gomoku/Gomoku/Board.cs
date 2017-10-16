@@ -117,8 +117,7 @@ namespace Gomoku
 
             while ((Location.Column >= 0) && (Location.Column < 15) && (Location.Row >= 0) && (Location.Row < 15) && (this[Location.Column, Location.Row] == color))
             {
-                Location.Column += Delta.Column;
-                Location.Row += Delta.Row;
+                Location += Delta;
                 result++;
             }
 

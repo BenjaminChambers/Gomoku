@@ -11,7 +11,17 @@ namespace Gomoku
             this.Column = Column;
             this.Row = Row;
         }
-        public int Column;
-        public int Row;
+
+        static public Coordinate operator+(Coordinate A, Coordinate B)
+        {
+            return new Coordinate(A.Column + B.Column, A.Row + B.Row);
+        }
+        static public Coordinate operator-(Coordinate A, Coordinate B)
+        {
+            return new Coordinate(A.Column - B.Column, A.Row - B.Row);
+        }
+
+        public readonly int Column;
+        public readonly int Row;
     }
 }
