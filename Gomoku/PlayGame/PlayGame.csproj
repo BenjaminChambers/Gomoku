@@ -107,5 +107,9 @@
   <ItemGroup>
     <Resource Include="Media\Empty.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Media\BlackThreat.png" />
+    <Resource Include="Media\WhiteThreat.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

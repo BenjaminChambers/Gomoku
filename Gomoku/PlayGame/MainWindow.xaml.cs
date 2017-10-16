@@ -20,7 +20,7 @@ namespace PlayGame
     /// </summary>
     public partial class MainWindow : Window
     {
-        Dictionary<Gomoku.Stone, BitmapImage> ImageCache = new Dictionary<Gomoku.Stone, BitmapImage>();
+        Dictionary<string, BitmapImage> ImageCache = new Dictionary<string, BitmapImage>();
         Gomoku.Board board;
         bool White = false;
 
@@ -30,14 +30,19 @@ namespace PlayGame
         {
             InitializeComponent();
 
-            ImageCache[Gomoku.Stone.Black] = new BitmapImage(new Uri("/Media/Black.png", UriKind.RelativeOrAbsolute));
-            ImageCache[Gomoku.Stone.White] = new BitmapImage(new Uri("/Media/White.png", UriKind.RelativeOrAbsolute));
-            ImageCache[Gomoku.Stone.Empty] = new BitmapImage(new Uri("/Media/Empty.png", UriKind.RelativeOrAbsolute));
+            ImageCache["Black"] = new BitmapImage(new Uri("/Media/Black.png", UriKind.RelativeOrAbsolute));
+            ImageCache["White"] = new BitmapImage(new Uri("/Media/White.png", UriKind.RelativeOrAbsolute));
+            ImageCache["Empty"] = new BitmapImage(new Uri("/Media/Empty.png", UriKind.RelativeOrAbsolute));
+            ImageCache["WhiteThreat"] = new BitmapImage(new Uri("/Media/WhiteThreat.png", UriKind.RelativeOrAbsolute));
+            ImageCache["BlackThreat"] = new BitmapImage(new Uri("/Media/BlackThreat.png", UriKind.RelativeOrAbsolute));
 
             for (int i = 0; i < 15; i++)
             {
                 GameGrid.ColumnDefinitions.Add(new ColumnDefinition());
                 GameGrid.RowDefinitions.Add(new RowDefinition());
+
+                ThreatGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                ThreatGrid.RowDefinitions.Add(new RowDefinition());
             }
 
             Cells = new Button[15, 15];
@@ -46,7 +51,7 @@ namespace PlayGame
             {
                 for (int c = 0; c < 15; c++)
                 {
-                    var img = new Image() { Source = ImageCache[Gomoku.Stone.Empty] };
+                    var img = new Image() { Source = ImageCache["Empty"] };
 
                     Cells[c, r] = new Button()
                     {
@@ -82,9 +87,11 @@ namespace PlayGame
             {
                 for (int c = 0; c < 15; c++)
                 {
-                    ((Image)Cells[c,r].Content).Source = ImageCache[board[c,r]];
+                    ((Image)Cells[c,r].Content).Source = ImageCache[board[c,r].ToString()];
                 }
             }
+
+            ThreatGrid.Children.Clear();
         }
 
         private void OnPlayCell(object sender, RoutedEventArgs e)
@@ -101,13 +108,13 @@ namespace PlayGame
                     if (White)
                     {
                         board = board.Put(new Gomoku.Coordinate(Col, Row), Gomoku.Stone.White);
-                        ((Image)b.Content).Source = ImageCache[Gomoku.Stone.White];
+                        ((Image)b.Content).Source = ImageCache["White"];
                         WhiteMoves.Children.Add(new TextBlock() { Text = string.Format("{0},{1}", Col, Row) });
                     }
                     else
                     {
                         board = board.Put(new Gomoku.Coordinate(Col, Row), Gomoku.Stone.Black);
-                        ((Image)b.Content).Source = ImageCache[Gomoku.Stone.Black];
+                        ((Image)b.Content).Source = ImageCache["Black"];
                         BlackMoves.Children.Add(new TextBlock() { Text = string.Format("{0},{1}", Col, Row) });
                     }
                     White = !White;
@@ -197,6 +204,27 @@ namespace PlayGame
             var bounds = board.GetBounds();
             board = board.Shift(new Gomoku.Coordinate(14 -bounds.Maximum.Column, 14 - bounds.Maximum.Row));
             RedrawAll();
+        }
+
+        private void OnFindThreats(object sender, RoutedEventArgs e)
+        {
+            ThreatGrid.Children.Clear();
+
+            foreach (var item in board.GetThreats(Gomoku.Stone.White))
+            {
+                var img = new Image() { Source = ImageCache["WhiteThreat"] };
+                Grid.SetColumn(img, item.Column);
+                Grid.SetRow(img, item.Row);
+                ThreatGrid.Children.Add(img);
+            }
+
+            foreach (var item in board.GetThreats(Gomoku.Stone.Black))
+            {
+                var img = new Image() { Source = ImageCache["BlackThreat"] };
+                Grid.SetColumn(img, item.Column);
+                Grid.SetRow(img, item.Row);
+                ThreatGrid.Children.Add(img);
+            }
         }
     }
 }

@@ -34,6 +34,7 @@
             <Button Width="75" Height="75" Margin="15" Click="OnNewGame" BorderThickness="1" >
                 <TextBlock Text="New Game" />
             </Button>
+
             <Grid Margin="15">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="75" />
@@ -75,15 +76,31 @@
                     <TextBlock Text="Center" TextAlignment="Center" TextWrapping="Wrap" />
                 </Button>
             </Grid>
+
+            <Button Width="75" Height="75" Margin="15" Click="OnFindThreats" BorderThickness="1" >
+                <TextBlock Text="Find Threats" />
+            </Button>
+
         </StackPanel>
-        <Grid x:Name="GameGrid"
-              HorizontalAlignment="Center" VerticalAlignment="Center"
+
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
               Height="600" Width="600"
               Grid.Column="1">
             <Grid.Background>
                 <ImageBrush ImageSource="Media/Board.png" Stretch="Uniform"/>
             </Grid.Background>
         </Grid>
+        <Grid x:Name="ThreatGrid"
+              HorizontalAlignment="Center" VerticalAlignment="Center"
+              Height="600" Width="600"
+              Grid.Column="1">
+        </Grid>
+        <Grid x:Name="GameGrid"
+              HorizontalAlignment="Center" VerticalAlignment="Center"
+              Height="600" Width="600"
+              Grid.Column="1" />
+
+
         <StackPanel Grid.Column="2">
             <TextBlock Text="Move History" HorizontalAlignment="Center" />
             <Grid Margin="15">
