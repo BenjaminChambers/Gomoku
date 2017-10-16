@@ -96,6 +96,30 @@ namespace Gomoku
 
             return (new Coordinate(minC, minR), new Coordinate(maxC, maxR));
         }
+
+        public List<Coordinate> GetThreats(Stone Aggressor)
+        {
+            var result = new List<Coordinate>();
+
+            for (int c=0; c<15; c++)
+            {
+                for (int r=0; r<15; r++)
+                {
+                    if (this[c,r] == Stone.Empty)
+                    {
+                        int d19 = Crawl(new Coordinate(c, r), new Coordinate(-1, -1), Aggressor) + Crawl(new Coordinate(c, r), new Coordinate(1, 1), Aggressor);
+                        int d28 = Crawl(new Coordinate(c, r), new Coordinate(0, -1), Aggressor) + Crawl(new Coordinate(c, r), new Coordinate(0, 1), Aggressor);
+                        int d37 = Crawl(new Coordinate(c, r), new Coordinate(-1, 1), Aggressor) + Crawl(new Coordinate(c, r), new Coordinate(1, -1), Aggressor);
+                        int d46 = Crawl(new Coordinate(c, r), new Coordinate(-1, 0), Aggressor) + Crawl(new Coordinate(c, r), new Coordinate(1, 0), Aggressor);
+
+                        if ((d19 >= 4) || (d28 >= 4) || (d37 >= 4) || (d46 >= 4))
+                            result.Add(new Coordinate(c, r));
+                    }
+                }
+            }
+
+            return result;
+        }
         #endregion
 
         #region Private
