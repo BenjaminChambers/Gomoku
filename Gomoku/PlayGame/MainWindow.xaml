@@ -31,20 +31,20 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <Button Width="75" Height="75" Margin="15" Click="OnNewGame" BorderThickness="1" >
+            <Button Width="60" Height="60" Margin="15" Click="OnNewGame" BorderThickness="1" >
                 <TextBlock Text="New Game" />
             </Button>
 
             <Grid Margin="15">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="75" />
-                    <ColumnDefinition Width="75" />
-                    <ColumnDefinition Width="75" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="75" />
-                    <RowDefinition Height="75" />
-                    <RowDefinition Height="75" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
                 <Button Grid.Column="1" Grid.Row="0" Padding="0" Click="OnShiftUp" BorderThickness="1" >
                     <TextBlock Text="Shift Up One" TextAlignment="Center" TextWrapping="Wrap" />
@@ -77,10 +77,35 @@
                 </Button>
             </Grid>
 
-            <Button Width="75" Height="75" Margin="15" Click="OnFindThreats" BorderThickness="1" >
+            <Button Width="60" Height="60" Margin="15" Click="OnFindThreats" BorderThickness="1" >
                 <TextBlock Text="Find Threats" />
             </Button>
 
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Width="60" Height="60" Margin="15" Grid.Column="0" Click="OnFlipHorizontal" BorderThickness="1" >
+                    <TextBlock Text="Flip Horizontal" />
+                </Button>
+                <Button Width="60" Height="60" Margin="15" Grid.Column="1" Click="OnFlipVertical" BorderThickness="1" >
+                    <TextBlock Text="Flip Vertical" />
+                </Button>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Width="60" Height="60" Margin="15" Grid.Column="0" Click="OnRotateCW" BorderThickness="1" >
+                    <TextBlock Text="Rotate CW" />
+                </Button>
+                <Button Width="60" Height="60" Margin="15" Grid.Column="1" Click="OnRotateCCW" BorderThickness="1" >
+                    <TextBlock Text="Rotate CCW" />
+                </Button>
+            </Grid>
         </StackPanel>
 
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -108,8 +133,8 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <StackPanel x:Name="BlackMoves" Width="75" Margin="15" />
-                <StackPanel x:Name="WhiteMoves" Width="75" Grid.Column="1" Margin="15" />
+                <StackPanel x:Name="BlackMoves" Width="60" Margin="15" />
+                <StackPanel x:Name="WhiteMoves" Width="60" Grid.Column="1" Margin="15" />
             </Grid>
         </StackPanel>
     </Grid>

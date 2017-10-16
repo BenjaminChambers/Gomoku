@@ -35,6 +35,66 @@ namespace Gomoku
             return result;
         }
 
+        public Board FlipHorizontal()
+        {
+            var result = new Board();
+
+            for (int c = 0; c < 15; c++)
+            {
+                for (int r = 0; r < 15; r++)
+                {
+                    result.data[c, r] = data[14 - c, r];
+                }
+            }
+
+            return result;
+        }
+
+        public Board FlipVertical()
+        {
+            var result = new Board();
+
+            for (int c = 0; c < 15; c++)
+            {
+                for (int r = 0; r < 15; r++)
+                {
+                    result.data[c, r] = data[c, 14-r];
+                }
+            }
+
+            return result;
+        }
+
+        public Board RotateCounterClockwise()
+        {
+            var result = new Board();
+
+            for (int c=0; c<15; c++)
+            {
+                for (int r=0; r<15; r++)
+                {
+                    result.data[c, r] = data[14 - r, c];
+                }
+            }
+
+            return result;
+        }
+
+        public Board RotateClockwise()
+        {
+            var result = new Board();
+
+            for (int c=0; c<15; c++)
+            {
+                for (int r=0; r<15; r++)
+                {
+                    result.data[c, r] = data[r, 14 - c];
+                }
+            }
+
+            return result;
+        }
+
         public Board Put(Coordinate Location, Stone Color)
         {
             if (Color == Stone.Empty)

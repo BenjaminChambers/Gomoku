@@ -226,5 +226,29 @@ namespace PlayGame
                 ThreatGrid.Children.Add(img);
             }
         }
+
+        private void OnFlipHorizontal(object sender, RoutedEventArgs e)
+        {
+            board = board.FlipHorizontal();
+            RedrawAll();
+        }
+
+        private void OnFlipVertical(object sender, RoutedEventArgs e)
+        {
+            board = board.FlipVertical();
+            RedrawAll();
+        }
+
+        private void OnRotateCW(object sender, RoutedEventArgs e)
+        {
+            board = board.RotateClockwise();
+            RedrawAll();
+        }
+
+        private void OnRotateCCW(object sender, RoutedEventArgs e)
+        {
+            board = board.RotateCounterClockwise();
+            RedrawAll();
+        }
     }
 }
