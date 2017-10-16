@@ -101,7 +101,7 @@ namespace Gomoku
             int d37 = Crawl(new Coordinate(Column, Row), new Coordinate(-1, 1), which) + Crawl(new Coordinate(Column, Row), new Coordinate(1, -1), which);
             int d46 = Crawl(new Coordinate(Column, Row), new Coordinate(-1, 0), which) + Crawl(new Coordinate(Column, Row), new Coordinate(1, 0), which);
 
-            if ((d19 > 5) || (d28 > 5) || (d37 > 5) || (d46 > 5))
+            if ((d19 >= 4) || (d28 >= 4) || (d37 >= 4) || (d46 >= 4))
             {
                 switch (which)
                 {
@@ -114,6 +114,8 @@ namespace Gomoku
         private int Crawl(Coordinate Location, Coordinate Delta, Stone color)
         {
             int result = 0;
+
+            Location += Delta;
 
             while ((Location.Column >= 0) && (Location.Column < 15) && (Location.Row >= 0) && (Location.Row < 15) && (this[Location.Column, Location.Row] == color))
             {
