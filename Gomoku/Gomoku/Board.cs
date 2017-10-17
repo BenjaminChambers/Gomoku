@@ -128,6 +128,13 @@ namespace Gomoku
                 return data[Column, Row];
             }
         }
+        public Stone this[Coordinate Where]
+        {
+            get
+            {
+                return data[Where.Column, Where.Row];
+            }
+        }
 
         public BoardState State
         {
