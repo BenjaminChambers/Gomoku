@@ -206,6 +206,18 @@ namespace Gomoku
                     case Stone.Black: State = BoardState.BlackWins; break;
                     case Stone.White: State = BoardState.WhiteWins; break;
                 }
+            } else
+            {
+                var foundEmpty = false;
+                foreach (var cell in data)
+                {
+                    if (cell == Stone.Empty)
+                        foundEmpty = true;
+                }
+                if (foundEmpty)
+                    State = BoardState.InProgress;
+                else
+                    State = BoardState.Tie;
             }
         }
 
