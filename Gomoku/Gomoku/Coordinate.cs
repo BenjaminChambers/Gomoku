@@ -12,6 +12,11 @@ namespace Gomoku
             this.Row = Row;
         }
 
+        public int Index
+        {
+            get { return Row * 15 + Column; }
+        }
+
         static public Coordinate operator+(Coordinate A, Coordinate B)
         {
             return new Coordinate(A.Column + B.Column, A.Row + B.Row);
