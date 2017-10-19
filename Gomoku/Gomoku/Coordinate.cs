@@ -17,11 +17,20 @@ namespace Gomoku
             get { return Row * 15 + Column; }
         }
 
-        static public Coordinate operator+(Coordinate A, Coordinate B)
+        public Coordinate RotateCW()
+            => new Coordinate(Row, 14 - Column);
+        public Coordinate RotateCCW()
+            => new Coordinate(14 - Row, Column);
+        public Coordinate FlipVertical()
+            => new Coordinate(Column, 14 - Row);
+        public Coordinate FlipHorizontal()
+            => new Coordinate(14 - Column, Row);
+
+        static public Coordinate operator +(Coordinate A, Coordinate B)
         {
             return new Coordinate(A.Column + B.Column, A.Row + B.Row);
         }
-        static public Coordinate operator-(Coordinate A, Coordinate B)
+        static public Coordinate operator -(Coordinate A, Coordinate B)
         {
             return new Coordinate(A.Column - B.Column, A.Row - B.Row);
         }

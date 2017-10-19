@@ -73,7 +73,7 @@ namespace Gomoku
             {
                 for (int r=0; r<15; r++)
                 {
-                    result.data[c, r] = data[14 - r, c];
+                    result.data[c, r] = this[new Coordinate(c, r).RotateCCW()];
                 }
             }
 
@@ -88,7 +88,7 @@ namespace Gomoku
             {
                 for (int r=0; r<15; r++)
                 {
-                    result.data[c, r] = data[r, 14 - c];
+                    result.data[c, r] = this[new Coordinate(c, r).RotateCW()];
                 }
             }
 
