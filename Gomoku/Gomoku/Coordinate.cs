@@ -18,9 +18,9 @@ namespace Gomoku
         }
 
         public Coordinate RotateCW()
-            => new Coordinate(Row, 14 - Column);
-        public Coordinate RotateCCW()
             => new Coordinate(14 - Row, Column);
+        public Coordinate RotateCCW()
+            => new Coordinate(Row, 14 - Column);
         public Coordinate FlipVertical()
             => new Coordinate(Column, 14 - Row);
         public Coordinate FlipHorizontal()
