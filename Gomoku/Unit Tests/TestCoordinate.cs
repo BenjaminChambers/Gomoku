@@ -105,5 +105,12 @@ namespace Unit_Tests
                 for (int r = 0; r < 15; r++)
                     Assert.AreEqual(new Coordinate(c, r).RotateCW().Index, Indices[r][c]);
         }
+
+        [TestMethod]
+        public void TestCreateByIndex()
+        {
+            for (int i = 0; i < 225; i++)
+                Assert.AreEqual(i, new Coordinate(i).Index);
+        }
     }
 }

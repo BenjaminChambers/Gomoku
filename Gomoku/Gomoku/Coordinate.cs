@@ -14,7 +14,7 @@ namespace Gomoku
         public Coordinate(int Index)
         {
             Row = Index / 15;
-            Column = Index - Row;
+            Column = Index % 15;
         }
 
         public int Index
