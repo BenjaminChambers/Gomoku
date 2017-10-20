@@ -11,6 +11,11 @@ namespace Gomoku
             this.Column = Column;
             this.Row = Row;
         }
+        public Coordinate(int Index)
+        {
+            Row = Index / 15;
+            Column = Index - Row;
+        }
 
         public int Index
         {
