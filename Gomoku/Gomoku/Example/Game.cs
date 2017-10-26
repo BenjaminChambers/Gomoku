@@ -6,7 +6,10 @@ namespace Gomoku.Example
 {
     public class Game
     {
-        public Game() { }
+        public Game()
+        {
+            CurrentBoard = new Board();
+        }
 
         public Board CurrentBoard { get; private set; }
         public IReadOnlyList<(Stone Color, Coordinate Where, Board Result)> GetHistory() { return History; }

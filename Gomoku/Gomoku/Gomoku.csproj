@@ -3,7 +3,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.0.33-dev000002</Version>
+    <Version>1.0.0.34-dev000001</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
