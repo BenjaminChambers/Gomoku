@@ -12,15 +12,15 @@ namespace Gomoku.Example
         }
 
         public Board CurrentBoard { get; private set; }
+        public Stone CurrentPlayer { get { return History.Count % 2 == 0 ? Stone.Black : Stone.White; } }
         public IReadOnlyList<(Stone Color, Coordinate Where, Board Result)> GetHistory() { return History; }
 
         public void PlayMove(Coordinate Location)
         {
             if (CurrentBoard.State == BoardState.InProgress)
             {
-                Stone player = (History.Count % 2 == 0) ? Stone.Black : Stone.White;
-                CurrentBoard = CurrentBoard.Put(Location, player);
-                History.Add((player, Location, CurrentBoard));
+                CurrentBoard = CurrentBoard.Put(Location, CurrentPlayer);
+                History.Add((CurrentPlayer, Location, CurrentBoard));
             }
         }
 
