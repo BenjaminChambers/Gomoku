@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Gomoku
 {
-    public class Board
+    public class Board : IEnumerable<Stone>
     {
         #region Constructors
         public Board()
@@ -239,6 +240,25 @@ namespace Gomoku
         }
 
         private Stone[,] data = new Stone[15, 15];
+        #endregion
+
+
+        #region Enumeration
+        public IEnumerator<Stone> GetEnumerator()
+        {
+            for (int i = 0; i < 225; i++)
+            {
+                yield return this[new Coordinate(i)];
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            for (int i = 0; i < 225; i++)
+            {
+                yield return this[new Coordinate(i)];
+            }
+        }
         #endregion
     }
 }
